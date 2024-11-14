@@ -735,9 +735,10 @@
 </product-info>
 
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    const swiper = new Swiper('.swiper-container', {
-      loop: true, // Enable looping
+ document.addEventListener('DOMContentLoaded', function () {
+  try {
+    const mainSwiper = new Swiper('.swiper-container', {
+      loop: true,
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
@@ -746,14 +747,31 @@
         el: '.swiper-pagination',
         clickable: true,
       },
-     // autoplay: {
-      //  delay: 5000, // Adjust delay as needed
-      //  disableOnInteraction: false,
-     // },
-      slidesPerView: 1, // Adjust as needed for responsive layouts
-      spaceBetween: 20, // Adjust space between slides if needed
+      slidesPerView: 1,
+      spaceBetween: 20,
     });
-  });
+  } catch (error) {
+    console.error('Main Swiper failed to load:', error);
+  }
+
+  try {
+    const productSwiper = new Swiper('.swiper-container-products', {
+      slidesPerView: 4,
+      spaceBetween: 4,
+      pagination: {
+        el: '.swiper-pagination-products',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next-products',
+        prevEl: '.swiper-button-prev-products',
+      }
+    });
+  } catch (error) {
+    console.error('Product Swiper failed to load:', error);
+  }
+});
+
 
   
 </script>

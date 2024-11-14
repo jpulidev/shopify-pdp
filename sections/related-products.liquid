@@ -22,7 +22,7 @@
 
 <div class="color-{{ section.settings.color_scheme }} gradient">
   <product-recommendations
-    class="related-products page-width section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
+    class="related-products page-width-recommendation section-{{ section.id }}-padding isolate{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
     data-url="{{ routes.product_recommendations_url }}?limit={{ section.settings.products_to_show }}"
     data-section-id="{{ section.id }}"
     data-product-id="{{ product.id }}"
@@ -31,32 +31,80 @@
       <h2 class="related-products__heading inline-richtext {{ section.settings.heading_size }}">
         {{ section.settings.heading }}
       </h2>
-      <ul
-        class="grid product-grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-        role="list"
-      >
-        {% assign skip_card_product_styles = false %}
-        {% for recommendation in recommendations.products %}
-          <li class="grid__item">
-            {% render 'card-product',
-              card_product: recommendation,
-              media_aspect_ratio: section.settings.image_ratio,
-              image_shape: section.settings.image_shape,
-              show_secondary_image: section.settings.show_secondary_image,
-              show_vendor: section.settings.show_vendor,
-              show_rating: section.settings.show_rating,
-              skip_styles: skip_card_product_styles
-            %}
-          </li>
-          {%- assign skip_card_product_styles = true -%}
-        {% endfor %}
-      </ul>
+      <!-- Swiper container -->
+      <div class="swiper-container-products">
+        <!-- Wrapper for slides -->
+        <div class="swiper-wrapper">
+          {% assign skip_card_product_styles = false %}
+          {% for recommendation in recommendations.products %}
+            <!-- Each slide -->
+            <div class="swiper-slide">
+              <div class="grid-products">
+                {% render 'card-product',
+                  card_product: recommendation,
+                  media_aspect_ratio: section.settings.image_ratio,
+                  image_shape: section.settings.image_shape,
+                  show_secondary_image: section.settings.show_secondary_image,
+                  show_vendor: section.settings.show_vendor,
+                  show_rating: section.settings.show_rating,
+                  skip_styles: skip_card_product_styles
+                %}
+              </div>
+            </div>
+            {%- assign skip_card_product_styles = true -%}
+          {% endfor %}
+        </div>
+       
+        <div class="swiper-pagination-products"></div>
+        <div class="swiper-button-next-products">
+          <svg class="next-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow" transform="translate(100, 100) rotate(180) "></path></svg>
+        </div>
+        <div class="swiper-button-prev-products">
+          <svg class="prev-icon" viewBox="0 0 100 100"><path d="M 10,50 L 60,100 L 70,90 L 30,50  L 70,10 L 60,0 Z" class="arrow"></path></svg>
+        </div>
+      </div>
     {% endif %}
   </product-recommendations>
-  {% if section.settings.image_shape == 'arch' %}
-    {{ 'mask-arch.svg' | inline_asset_content }}
-  {%- endif -%}
 </div>
+
+<script>
+
+  document.addEventListener('DOMContentLoaded', function () {
+
+  setTimeout(() => {
+    new Swiper('.swiper-container-products', {
+      slidesPerView: 2, // Adjust this or make dynamic based on `columns_desktop`
+      spaceBetween:10,
+      pagination: {
+        el: '.swiper-pagination-products',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next-products',
+        prevEl: '.swiper-button-prev-products',
+      },
+         // Responsive breakpoints
+    breakpoints: {
+      768: { // Mobile screens 768px and below
+        slidesPerView: 2,
+        spaceBetween: 10, // Adjust spacing for mobile if needed
+      },
+      1024: { // Tablet screens 1024px and below
+        slidesPerView: 3, // Adjust for tablet size if needed
+        spaceBetween: 10,
+      },
+      1220: { // Tablet screens 1024px and below
+        slidesPerView: 4, // Adjust for tablet size if needed
+        spaceBetween: 10,
+      },
+    },
+
+    });
+    }, 1200);
+
+  });
+</script>
+
 
 {% schema %}
 {
