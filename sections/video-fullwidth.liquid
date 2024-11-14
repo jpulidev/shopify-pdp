@@ -1,0 +1,58 @@
+{{ 'video-section.css' | asset_url | stylesheet_tag }}
+
+<div class="video-section">
+  {{
+    section.settings.video
+    | video_tag:
+      image_size: '1100x',
+      autoplay: true,
+      loop: true,
+      controls: true,
+      muted: true
+  }}
+  <div class="v-align">
+          <div class="section_title text-center">
+            <h2>Watch  
+            </h2>
+          </div>
+          <a class="circle vimeo-modal" href="#" data-id="581922813">
+            <svg class="icon icon--wide icon-arrow-play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 8.4 13.2" style="enable-background:new 0 0 8.4 13.2;" xml:space="preserve">
+              <path d="M8.4,6.8L0,0v13.2L8.4,6.8z">
+              </path>
+            </svg>
+          </a>
+        </div>
+</div>
+
+{% schema %}
+{
+  "name": "video fullscreen",
+  "tag": "section",
+  "class": "section",
+  "disabled_on": {
+    "groups": ["header", "footer"]
+  },
+  "settings": [
+ 
+    {
+      "type": "video",
+      "id": "video",
+      "label": "t:sections.video.settings.video.label"
+    },
+    {
+      "type": "video_url",
+      "id": "video_url",
+      "accept": ["youtube", "vimeo"],
+      "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+      "label": "t:sections.video.settings.video_url.label",
+      "info": "t:sections.video.settings.video_url.info"
+    }
+  
+  ],
+  "presets": [
+    {
+      "name": "video fullscreen"
+    }
+  ]
+}
+{% endschema %}
