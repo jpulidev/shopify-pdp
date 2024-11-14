@@ -2014,6 +2014,47 @@ input[type='checkbox'] {
   position: relative;
 }
 
+.swiper-container {
+  width: 100%;
+  overflow: hidden; /* Prevents Swiper from overflowing */
+  max-width: 100%; /* Ensures it doesn’t exceed container size */
+  position: relative; /* Contain Swiper elements within this area */
+}
+
+.product-gallery-wrapper {
+  position: relative; /* Contains the Swiper to prevent overlapping */
+  max-width: 100%; /* Matches the layout */
+  overflow: hidden;
+}
+
+.swiper-button-next, .swiper-button-prev {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+.swiper-button-next {
+  right: 15px;
+  display: block !important;
+}
+
+.swiper-button-prev {
+  left: 15px;
+  display: block !important;
+}
+
+/* Adjust Swiper pagination to stay within the bounds */
+.swiper-pagination {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+}
+
+
+
+
 .product__info-container .loading__spinner:not(.hidden) ~ *,
 .quantity__rules-cart .loading__spinner:not(.hidden) ~ * {
   visibility: hidden;
