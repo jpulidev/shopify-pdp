@@ -2106,6 +2106,11 @@ input[type='checkbox'] {
     left: 3px;
 }
 
+.subify-powered-text {
+  position: absolute!important;
+  z-index: -1!important;
+}
+
 .related-products__heading {
   color: #243a7b;
 }
@@ -2234,12 +2239,32 @@ input[type='checkbox'] {
   grid-area: social-icons;
 }
 
+.grid-cards-section {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  margin: 4% 1%;
+  flex-wrap: wrap;
+  gap: 29px;
+}
+.title-card-grid {
+  color: #303c86;
+  max-width: 335px;
+  margin: 0 auto;
+  font-size: 13px;
+  line-height: 20px;
+}
+
 @media screen and (max-width: 989px) {
   .utility-bar .utility-bar__grid .list-social {
     display: none;
   }
   .grid-items-section {
     grid-template-columns: 1fr;
+  }
+  .page-width-pdp {
+    padding: 20px;
   }
 }
 
