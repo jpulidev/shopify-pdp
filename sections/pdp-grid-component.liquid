@@ -1,0 +1,108 @@
+{% if section.settings.show_component == "true" %}
+    <div class="grid-items-section">
+    
+    {%- for block in section.blocks -%}
+        <div class="card-grid">
+          
+          {% if block.settings.image_background != blank %}
+          <img src="{{ block.settings.image_background | image_url: width: 1500 }}" alt="{{ block.settings.image_background.alt }}" 
+          class="card-grid-image" width="1000" height="1000"  loading="lazy"  role="img" style="width:100%;height:100%;">
+            {% else %}
+            <div class="content-grid-text">
+               {% if block.settings.image_title != blank   %}
+                <img src="{{ block.settings.image_title | image_url: width: 300 }}" alt="{{ block.settings.image_title.alt }}" 
+                class="card-content-image" width="300" height="300"  loading="lazy"  role="img">
+               {% endif %}
+                <h2 class="title-content-grid">
+                {{block.settings.title}}
+               </h2>
+               <h3 class="subtitle-content-grid">
+                {{block.settings.sub-title}}
+               </h3>
+               <div class="content">
+                {{block.settings.content}}
+               </div>
+            </div>
+          {% endif %}  
+          
+        </div>
+    {%- endfor -%}    
+
+</div>
+{% endif %}    
+
+
+{% schema %}
+  {
+    "name": "Grid Component PDP",
+    "tag": "section",
+    "class": "grid-component-pdp",
+    "settings": [
+        {
+      "type": "text",
+      "id": "show_component",
+      "label": "Display Grid Component",
+      "default": "false"
+    },
+    ],
+    "blocks": [
+      {
+        "name": "Card",
+        "type": "grid-component",
+        "settings": [
+       
+           {
+             "type": "image_picker",
+             "id": "image_background",
+             "label": "Image Background"
+           },
+           {
+             "type": "image_picker",
+             "id": "image_title",
+             "label": "Image Title"
+           },
+           {
+             "type": "inline_richtext",
+             "id": "title",
+             "label": "Plan Name",
+             "default":"The Craft"
+           },
+           {
+             "type": "inline_richtext",
+             "id": "sub-title",
+             "label": "Sub Title",
+              "default":"100% natural pigments &/or mordants to dye fibers and garments"
+           },
+           {
+            "type": "html",
+             "id": "content",
+             "label": "content",
+              "default":"<p>The craft of naturally dyed textile production and pesticide-free cotton cultivation goes back thousands of years, with strong roots in the Indian subcontinent. The origins of vegetable dyeing in India can be traced to the Indus Valley around the 4th millenium B.C. Thousands of years later, the synthesis of petroleum-based dyes proliferated in the 1870’s, bringing an end to widespread use of natural processes.</p><p>Shortsightedly convenient and inexpensive GMO & pesticide heavy cotton, petroleum-based dyes, and exploited garment manufacturing labor, has largely replaced the sustainable craft of milled organic cotton, colored with natural dyes, cut and sewn into finished garments with integrity. This shift has spoiled the natural world for more than a century, causing drastic consequences to garment workers and our environment.</p><p>Through the Clean Clothes project, we aim to create dialogue and research for two primary goals: 1) to respect and advocate for the usage of pesticide-free, non-GMO organic cotton; and 2) if dyeing is necessary, to use only 100% natural dyes. By issuing constraints on dyeing and washing processes, not only can we assure Clean Clothes on our skin, but cleaner rivers, oceans, soil, and air for everyone.</p>"
+           }
+         
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "PDP Grid Component",
+        "settings": {
+        },
+        "blocks": [
+          {
+            "type": "grid-component"
+          }, 
+          {
+            "type": "grid-component"
+          }, 
+          {
+            "type": "grid-component"
+          }, 
+          {
+            "type": "grid-component"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

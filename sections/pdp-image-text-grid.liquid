@@ -1,0 +1,89 @@
+
+{% if section.settings.show_component == "true" %}
+    <div class="grid-cards-section">
+    
+    {%- for block in section.blocks -%}
+        <div class="card-grid-items">
+          
+          {% if block.settings.image != blank %}
+         
+            <div class="card-grid-info">
+               {% if block.settings.image != blank   %}
+                <img src="{{ block.settings.image | image_url: width: 100 }}" alt="{{ block.settings.image.alt }}" 
+                class="card-grid-image" width="150" height="150"  loading="lazy"  role="img" style="width: 150px;height: 150px;object-fit: contain;">
+               {% endif %}
+                <p class="title-card-grid">
+                {{block.settings.title}}
+               </p>
+              
+            </div>
+          {% endif %}  
+          
+        </div>
+    {%- endfor -%}    
+
+</div>
+{% endif %}    
+
+
+{% schema %}
+  {
+    "name": "Grid Card PDP",
+    "tag": "section",
+    "class": "grid-card-pdp",
+    "settings": [
+        {
+      "type": "text",
+      "id": "show_component",
+      "label": "Display Card Component",
+      "default": "false"
+    },
+    ],
+    "blocks": [
+      {
+        "name": "Card",
+        "type": "card",
+        "settings": [
+       
+          
+           {
+             "type": "image_picker",
+             "id": "image",
+             "label": "Image"
+           },
+           {
+             "type": "inline_richtext",
+             "id": "title",
+             "label": "Card Item"
+           }
+        
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "PDP Card Component",
+        "settings": {
+        },
+        "blocks": [
+          {
+            "type": "card"
+          }, 
+          {
+            "type": "card"
+          }, 
+          {
+            "type": "card"
+          }, 
+          {
+            "type": "card"
+          },
+          {
+            "type": "card"
+          }
+
+        ]
+      }
+    ]
+  }
+{% endschema %}
