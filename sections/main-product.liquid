@@ -1,3 +1,13 @@
+<!-- Swiper CSS -->
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/swiper/swiper-bundle.min.css"
+/>
+<!-- Swiper JS -->
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+
 <product-info
   id="MainProduct-{{ section.id }}"
   class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
@@ -73,7 +83,7 @@
   {%- endif -%}
 
   {% assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src' %}
-  <div class="page-width">
+  <div class="page-width-pdp">
     <div class="product product--{{ section.settings.media_size }} product--{{ section.settings.media_position }} product--{{ section.settings.gallery_layout }} product--mobile-{{ section.settings.mobile_thumbnails }} grid grid--1-col {% if product.media.size > 0 %}grid--2-col-tablet{% else %}product--no-media{% endif %}">
       <div class="grid__item product__media-wrapper">
         {% render 'product-media-gallery', variant_images: variant_images %}
@@ -724,6 +734,47 @@
   </div>
 </product-info>
 
+<script>
+ document.addEventListener('DOMContentLoaded', function () {
+  try {
+    const mainSwiper = new Swiper('.swiper-container', {
+      loop: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      slidesPerView: 1,
+      spaceBetween: 20,
+    });
+  } catch (error) {
+    console.error('Main Swiper failed to load:', error);
+  }
+
+  try {
+    const productSwiper = new Swiper('.swiper-container-products', {
+      slidesPerView: 4,
+      spaceBetween: 4,
+      pagination: {
+        el: '.swiper-pagination-products',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next-products',
+        prevEl: '.swiper-button-prev-products',
+      }
+    });
+  } catch (error) {
+    console.error('Product Swiper failed to load:', error);
+  }
+});
+
+
+  
+</script>
 {% schema %}
 {
   "name": "t:sections.main-product.name",

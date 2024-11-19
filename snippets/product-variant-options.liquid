@@ -91,8 +91,17 @@
       {% endif %}
       {{ input_dataset }}
     >
-    <label for="{{ input_id }}">
-      {{ value -}}
+    <label for="{{ input_id }}" 
+    {% if option.name == 'Color' %}
+      class="color-swatch-label"
+      style="background-color:var(--{{value | escape }})"
+    {% endif %} 
+    >
+    {% if option.name == 'Color' %}
+    {% else %}
+    {{ value -}} 
+  {% endif %} 
+   
       {{ label_unavailable }}
     </label>
   {%- elsif picker_type == 'dropdown' or picker_type == 'swatch_dropdown' -%}
